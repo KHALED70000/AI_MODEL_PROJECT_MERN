@@ -66,7 +66,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="bg-gray-950 text-gray-200 my-20 max-[768px]:mt-[56px] ">
+        <div className="bg-gray-950 text-gray-200 my-16 max-[768px]:mt-[56px] ">
             {/* 🌟 Hero Section */}
             <section className="text-center py-20 bg-gradient-to-b from-gray-900 to-gray-950">
                 <h1 className="text-4xl md:text-6xl font-bold text-blue-400 mb-4">

@@ -1,13 +1,18 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { use, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react"; // 👁️ React icons (lucide-react)
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../CONTEXT/AuthContext";
 
 // যদি lucide-react install না করা থাকে:
 // npm install lucide-react
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState()
+
+    const navigate = useNavigate()
+    const {logInUser,signInWithGoogle, setUser}=use(AuthContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,9 +20,30 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
+        logInUser(email, password)
+        .then((result)=>{
+            const NEW_USER = result.user;
+            setUser(NEW_USER);
+
+            form.reset();
+            navigate('/');
+        })
+        .catch(()=>{
+            setError('Invalid Email or Password')
+        })
+
         console.log({ email, password });
         // later: add Firebase / JWT auth logic here
     };
+
+    const googleSignIn = () => {
+        signInWithGoogle()
+        .then((result)=>{
+            const NEW_USER = result.user;
+            setUser(NEW_USER);
+            navigate('/');
+        })
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-gray-900 px-4">
@@ -70,6 +96,10 @@ const Login = () => {
                         </button>
                     </div>
 
+                    {
+                        error && <p className="text-red-600 font-semibold">{error}</p>
+                    }
+
                     {/* Submit */}
                     <button
                         type="submit"
@@ -78,7 +108,7 @@ const Login = () => {
                         Log In
                     </button>
                 </form>
-                <button className="mt-6 w-full flex items-center justify-center gap-3 bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 py-3 rounded-lg font-medium transition-all duration-200">
+                <button onClick={googleSignIn} className="mt-6 w-full flex items-center justify-center gap-3 bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 py-3 rounded-lg font-medium transition-all duration-200">
                     <FcGoogle size={25} /> Continue with Google
                 </button>
 

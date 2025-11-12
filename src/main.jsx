@@ -9,6 +9,9 @@ import Home from './PAGEs/HOME/Home.jsx';
 import Login from './PAGEs/LOGIN/Login.jsx';
 import Ragister from './PAGEs/RAGISTER/Ragister.jsx';
 import AuthProvider from './CONTEXT/AuthProvider.jsx';
+import Addmodel from './PAGEs/ADDMODEL/Addmodel.jsx';
+import Allmodel from './PAGEs/ALLMODEL/Allmodel.jsx';
+import Privetrout from './PRIVETr/Privetrout.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +22,18 @@ const router = createBrowserRouter([
         index: true,
         path: '/',
         Component: Home,
+      },
+      {
+        path: '/addmodel',
+        element: <Privetrout>
+          <Addmodel></Addmodel>
+        </Privetrout>
+      },
+      {
+        path: '/allmodels',
+        element: <Privetrout>
+          <Allmodel></Allmodel>
+        </Privetrout>
       },
       {
         path: '/login',

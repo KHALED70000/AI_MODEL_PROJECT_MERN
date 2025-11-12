@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.AC_parent .active{
+    border-bottom: 3px solid #60A5FA;
+}
+.AC_parent_mobile .active{
+    color: #1F2937;
+    background: rgb(165, 164, 164);
+}

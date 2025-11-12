@@ -1,56 +1,75 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { use, useRef, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../CONTEXT/AuthContext";
+import { TbLogout } from "react-icons/tb";
 
-const Navbar = ({ user }) => {
+const Navbar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     // Toggle function: same icon open/close
     const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
     const Links = <>
-        <Link
+        <NavLink
             to="/"
-            className="hover:text-blue-400 transition"
+            className="hover:text-blue-400 transition  px-6"
             onClick={toggleSidebar}
         >
             Home
-        </Link>
-        <Link
-            to="/add-model"
-            className="hover:text-blue-400 transition"
+        </NavLink>
+        <NavLink
+            to="/addmodel"
+            className="hover:text-blue-400 transition  px-6"
             onClick={toggleSidebar}
         >
             Add Model
-        </Link>
-        <Link
-            to="/all-models"
-            className="hover:text-blue-400 transition"
+        </NavLink>
+        <NavLink
+            to="/allmodels"
+            className="hover:text-blue-400 transition  px-6"
             onClick={toggleSidebar}
         >
             All Models
-        </Link>
+        </NavLink>
     </>
-    
     const Links_FOR_LARG = <>
-        <Link
+        <NavLink
             to="/"
-            className="hover:text-blue-400 transition py-4 font-semibold"
+            className="hover:text-blue-400 transition p-1 font-semibold"
         >
             Home
-        </Link>
-        <Link
-            to="/add-model"
-            className="hover:text-blue-400 transition py-4 font-semibold"
+        </NavLink>
+        <NavLink
+            to="/addmodel"
+            className="hover:text-blue-400 transition p-1 font-semibold"
         >
             Add Model
-        </Link>
-        <Link
-            to="/all-models"
-            className="hover:text-blue-400 transition py-4 font-semibold"
+        </NavLink>
+        <NavLink
+            to="/allmodels"
+            className="hover:text-blue-400 transition p-1 font-semibold"
         >
             All Models
-        </Link>
+        </NavLink>
     </>
+    const { user, signOutUser } = use(AuthContext);
+
+    const profile = useRef()
+    const handleProfile = ()=>{
+        profile.current.showModal()
+    }
+  
+    const navigate = useNavigate()
+    const modalClose = () => {
+        profile.current.close()
+    }
+      const modalCloseLog = () => {
+        signOutUser()
+        .then(()=> {
+            navigate('/login')
+        })
+        profile.current.close()
+    }
 
     return (
         <>
@@ -77,7 +96,7 @@ const Navbar = ({ user }) => {
                     </div>
 
                     {/* Middle: Menu Links (only large devices) */}
-                    <div className="hidden md:flex space-x-8 text-lg">
+                    <div className="hidden md:flex space-x-8 text-lg AC_parent">
                         {Links_FOR_LARG}
                     </div>
 
@@ -91,11 +110,15 @@ const Navbar = ({ user }) => {
                                 Login
                             </Link>
                         ) : (
-                            <img
-                                src={user.photoURL}
-                                alt="Profile"
-                                className="w-10 h-10 rounded-full border-2 border-blue-400"
-                            />
+                            <div onClick={handleProfile}>
+                                <img
+                                    src={user.photoURL}
+                                    alt="Profile"
+                                    className="w-10 h-10 rounded-full border-2 border-blue-400"
+                                />
+
+
+                            </div>
                         )}
                     </div>
                 </div>
@@ -115,7 +138,7 @@ const Navbar = ({ user }) => {
                 </div>
 
                 {/* Sidebar Menu Items */}
-                <div className="flex flex-col mt-4 space-y-3 px-6">
+                <div className="flex flex-col mt-4 space-y-3 AC_parent_mobile">
                     {Links}
                 </div>
             </div>
@@ -127,6 +150,34 @@ const Navbar = ({ user }) => {
                     className="fixed inset-0 bg-[rgba(0,0,0,0.3)] backdrop-blur-lg bg-opacity-50 z-30 transition-opacity duration-300"
                 ></div>
             )}
+
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+           
+            <dialog ref={profile} className="modal">
+                <div className="modal-box">
+                    <div className="flex justify-center w-full">
+                        <img className="rounded-full w-[200px] h-[200px]" src={user?.photoURL} alt="" />
+                    </div>
+                    <p className="text-2xl uppercase italic text-center font-semibold mt-2">{user?.displayName}</p>
+                    <p className="text-gray-300  italic text-center">{user?.email}</p>
+                    <ul className="grid gap-2 mt-6">
+                       
+                        <li onClick={modalClose} className="cursor-pointer font-bold">
+                            Model Purchase
+                        </li>
+                        <li onClick={modalClose} className="cursor-pointer font-bold">
+                            My Models
+                        </li>
+                         <li onClick={modalCloseLog} className="cursor-pointer flex gap-2 text-red-500 font-bold">
+                            <TbLogout size={25}/> Log Out
+                        </li>
+
+                    </ul>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </>
     );
 };
