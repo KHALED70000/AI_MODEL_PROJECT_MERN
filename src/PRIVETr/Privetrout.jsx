@@ -15,7 +15,7 @@ const Privetrout = ({ children }) => {
     if (loading) {
         return (
             <div className="flex justify-center items-center min-h-screen text-blue-400 text-xl">
-                <span className="loading loading-spinner text-info"></span>
+                <span className="loading loading-spinner text-info h-[100px] w-[100px]"></span>
             </div>
         );
     }

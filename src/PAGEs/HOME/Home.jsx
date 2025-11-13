@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import LetestProducts from "../../COMPONENTS/LetestProducts";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
+import axiosInstance from "../../AXIOS_api/Axio";
 
 const Home = () => {
     // 🔹 Demo data (later replace with API fetch)
@@ -11,9 +12,9 @@ const Home = () => {
     const [latestModels, setLatestModels] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/Letest-AllModels")
-            .then((res) => res.json())
-            .then((data) => setLatestModels(data))
+        axiosInstance.get("/Letest-AllModels")
+            // .then((res) => res.json())
+            .then((data) => setLatestModels(data.data))
             .catch((err) => console.error("Error fetching models:", err));
     }, []);
 

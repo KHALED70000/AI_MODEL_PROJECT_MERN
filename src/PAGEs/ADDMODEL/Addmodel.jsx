@@ -1,6 +1,6 @@
 import { use } from "react";
 import { AuthContext } from "../../CONTEXT/AuthContext";
-import axios from "../../AXIOS_api/Axio";
+import axiosInstance from "../../AXIOS_api/Axio";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -20,13 +20,13 @@ const AddModel = () => {
         const description = form.description.value;
         const image = form.image.value;
         const createdBy = user ? user.email : 'fake@fake.fake';
-        const createdAt = new Date().toISOString().split("T")[0];
+        const createdAt = new Date().toISOString();
         const purchased = 0;
 
         // const NewAIMODEL = { name, framework, useCase, dataset, description, image, createdBy, createdAt, purchased };
         // console.log("New Model Added:", NewAIMODEL);
 
-        axios.post("/AllModels", { name, framework, useCase, dataset, description, image, createdBy, createdAt, purchased })
+        axiosInstance.post("/AllModels", { name, framework, useCase, dataset, description, image, createdBy, createdAt, purchased })
             .then((res) => {
                 if (res.data.insertedId) {
                     toast.promise(
