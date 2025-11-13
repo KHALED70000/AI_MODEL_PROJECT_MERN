@@ -1,72 +1,24 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LetestProducts from "../../COMPONENTS/LetestProducts";
+import { useEffect, useState } from "react";
 
 const Home = () => {
     // 🔹 Demo data (later replace with API fetch)
-    const [models, setModels] = useState([]);
 
-    useEffect(() => {
-        const demoData = [
-            {
-                name: "BERT",
-                framework: "TensorFlow",
-                useCase: "NLP",
-                dataset: "Wikipedia",
-                description:
-                    "A transformer-based model for NLP tasks like text classification.",
-                image: "https://i.ibb.co/sample-image-bert-diagram.jpg",
-            },
-            {
-                name: "ResNet-50",
-                framework: "PyTorch",
-                useCase: "Image Recognition",
-                dataset: "ImageNet",
-                description:
-                    "A convolutional neural network for image classification and feature extraction.",
-                image: "https://i.ibb.co/sample-image-resnet.jpg",
-            },
-            {
-                name: "GPT-3",
-                framework: "TensorFlow",
-                useCase: "Text Generation",
-                dataset: "Common Crawl",
-                description:
-                    "An autoregressive transformer model for natural language generation.",
-                image: "https://i.ibb.co/sample-image-gpt3.jpg",
-            },
-            {
-                name: "YOLOv5",
-                framework: "PyTorch",
-                useCase: "Object Detection",
-                dataset: "COCO",
-                description:
-                    "Real-time object detection model optimized for speed and accuracy.",
-                image: "https://i.ibb.co/sample-image-yolo.jpg",
-            },
-            {
-                name: "Stable Diffusion",
-                framework: "PyTorch",
-                useCase: "Image Generation",
-                dataset: "LAION-5B",
-                description:
-                    "A text-to-image model that generates high-quality visuals from prompts.",
-                image: "https://i.ibb.co/sample-image-sd.jpg",
-            },
-            {
-                name: "Whisper",
-                framework: "OpenAI",
-                useCase: "Speech Recognition",
-                dataset: "Multilingual Audio",
-                description:
-                    "A general-purpose speech recognition model that transcribes multiple languages.",
-                image: "https://i.ibb.co/sample-image-whisper.jpg",
-            },
-        ];
-        setModels(demoData);
-    }, []);
+
+    // const letestModelsPromise = fetch("http://localhost:3000/Letest-AllModels").then(res => res.json())
+    const [latestModels, setLatestModels] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/Letest-AllModels")
+      .then((res) => res.json())
+      .then((data) => setLatestModels(data))
+      .catch((err) => console.error("Error fetching models:", err));
+  }, []);
+
 
     return (
-        <div className="bg-gray-950 text-gray-200 my-16 max-[768px]:mt-[56px] ">
+        <div className="bg-gradient-to-b from-gray-900 to-gray-950 text-gray-200 my-16 max-[768px]:mt-[56px] ">
             {/* 🌟 Hero Section */}
             <section className="text-center py-20 bg-gradient-to-b from-gray-900 to-gray-950">
                 <h1 className="text-4xl md:text-6xl font-bold text-blue-400 mb-4">
@@ -85,27 +37,9 @@ const Home = () => {
                 </h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {models.map((model, index) => (
-                        <div
-                            key={index}
-                            className="bg-gray-900 rounded-2xl shadow-lg hover:shadow-blue-500/20 overflow-hidden transition-all"
-                        >
-                            <img
-                                src={model.image}
-                                alt={model.name}
-                                className="w-full h-48 object-cover"
-                            />
-                            <div className="p-5">
-                                <h3 className="text-xl font-bold text-blue-400">
-                                    {model.name}
-                                </h3>
-                                <p className="text-sm text-gray-400 mt-1">
-                                    Framework: <span className="text-gray-300">{model.framework}</span>
-                                </p>
-                                <p className="text-gray-300 mt-3 text-sm">{model.description}</p>
-                            </div>
-                        </div>
-                    ))}
+
+                    <LetestProducts latestModels = {latestModels}></LetestProducts>
+                    
                 </div>
             </section>
 
