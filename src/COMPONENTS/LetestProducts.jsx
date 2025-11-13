@@ -6,7 +6,7 @@ import Card from './Card';
 const LetestProducts = ({latestModels}) => {
     const AiModels = latestModels;
     return (
-        <div>
+        <div className='grid grid-cols-3 gap-4'>
             {
                 AiModels.map(Aimodel => <Card key={Aimodel._id} Aimodel={Aimodel}/>)
             }

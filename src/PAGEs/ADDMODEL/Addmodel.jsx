@@ -1,6 +1,7 @@
 import { use } from "react";
 import { AuthContext } from "../../CONTEXT/AuthContext";
 import axios from "../../AXIOS_api/Axio";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddModel = () => {
 
@@ -26,8 +27,8 @@ const AddModel = () => {
         axios.post("/AllModels", { name, framework, useCase, dataset, description, image, createdBy, createdAt, purchased })
             .then(res => {
                 const Uploated = res.data;
-                if(Uploated.insertedId){
-                    alert('Successfully Uploated')
+                if (Uploated.insertedId) {
+                    toast.success("Successfully Uploated");
                     form.reset();
                 }
                 console.log("Added:", res.data)
@@ -43,6 +44,7 @@ const AddModel = () => {
                 <h2 className="text-3xl font-semibold text-center text-blue-400 mb-8">
                     Add New AI Model
                 </h2>
+                <ToastContainer position="top-center" />
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Model Name */}

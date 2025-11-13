@@ -6,7 +6,7 @@ const Card = ({ Aimodel }) => {
     return (
         <div className='from-gray-900 to-gray-950 bg-gradient-to-t p-4 rounded-2xl shadow-blue-glow'>
             <div>
-                <img className='rounded-2xl' src={image} alt={name} />
+                <img className='rounded-2xl h-[300px] w-full' src={image} alt={name} />
             </div>
 
             <div className='mt-4 grid gap-1'>
