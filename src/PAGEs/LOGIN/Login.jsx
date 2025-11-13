@@ -52,7 +52,7 @@ const Login = () => {
             <h2 className="text-4xl font-semibold text-center text-blue-400 mb-6">
                 Login to AI Model Inventory Manager
             </h2>
-            <div className="bg-gray-900 shadow-xl rounded-2xl p-8 w-full max-w-md border border-gray-800">
+            <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md border border-gray-800 shadow-[0_0_25px_rgba(0,170,255,0.2)]">
 
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -69,7 +69,7 @@ const Login = () => {
                             name="email"
                             type="email"
                             required
-                            className="w-full px-4 py-3 bg-gray-800 text-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 bg-gray-800 text-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:shadow-[0_0_35px_rgba(0,170,255,0.2)] transition duration-300"
                             placeholder="you@example.com"
                         />
                     </div>
@@ -87,7 +87,7 @@ const Login = () => {
                             name="password"
                             type={showPassword ? "text" : "password"}
                             required
-                            className="w-full px-4 py-3 bg-gray-800 text-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+                            className="w-full px-4 py-3 bg-gray-800 text-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 pr-10 focus:shadow-[0_0_35px_rgba(0,170,255,0.2)] transition duration-300"
                             placeholder="password here"
                         />
                         <button

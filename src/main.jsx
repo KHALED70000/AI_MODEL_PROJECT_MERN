@@ -40,7 +40,9 @@ const router = createBrowserRouter([
         path: "/viewmodel/:id",
         loader: ({ params }) => fetch(`http://localhost:3000/AllModels/${params.id}`),
         hydrateFallbackElement: <div>Loading...</div>,
-        Component: Viewmodel,
+        element: <Privetrout>
+          <Viewmodel></Viewmodel>
+        </Privetrout>
       },
       {
         path: '/login',

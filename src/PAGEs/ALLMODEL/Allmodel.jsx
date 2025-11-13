@@ -16,10 +16,10 @@ const Allmodel = () => {
 
     return (
         <div className='mt-20 max-[768px]:mt-[56px] '>
-            <div className='grid grid-cols-3 gap-4 max-[800px]:grid-cols-2 max-[600px]:grid-cols-1 container mx-auto'>
+            <div className='grid grid-cols-3 gap-6 max-[800px]:grid-cols-2 max-[600px]:grid-cols-1 container mx-auto'>
                 {
                     allmodels.map(allmodel => (
-                        <div className='from-gray-900 to-gray-950 bg-gradient-to-t p-4 rounded-2xl shadow-blue-glow'>
+                        <div className='from-gray-900 to-gray-950 bg-gradient-to-t p-4 rounded-2xl shadow-[0_0_25px_rgba(0,170,255,0.2)] hover:shadow-[0_0_35px_rgba(0,170,255,0.4)] transition-all duration-300'>
                             <div>
                                 <img className='rounded-2xl h-[300px] w-full' src={allmodel.image} alt={allmodel.name} />
                             </div>
@@ -34,7 +34,7 @@ const Allmodel = () => {
                                         : allmodel.description}
                                 </p>
 
-                                <NavLink to={`/viewmodel/${allmodel._id}`} className='btn bg-blue-500 mt-2'>View Details</NavLink>
+                                <NavLink to={`/viewmodel/${allmodel._id}`} className='mt-4 text-center bg-neon-blue text-white font-semibold py-3 rounded-xl shadow-[0_0_10px_rgba(0,200,255,0.6)] hover:shadow-[0_0_15px_rgba(0,200,255,0.9)] transition-all duration-300 hover:scale-102'>View Details</NavLink>
                             </div>
 
                         </div>

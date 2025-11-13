@@ -7,7 +7,7 @@ const Privetrout = ({ children }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!loading && !user) {
+        if (!user) {
             navigate("/login");
         }
     }, [user, loading, navigate]);

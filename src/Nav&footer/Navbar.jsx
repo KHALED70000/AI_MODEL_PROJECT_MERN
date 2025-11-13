@@ -103,12 +103,20 @@ const Navbar = () => {
                     {/* Right Side: Login Button */}
                     <div>
                         {!user ? (
-                            <Link
+                           <div className="flex gap-2">
+                             <Link
                                 to="/login"
                                 className="bg-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600 transition"
                             >
                                 Login
                             </Link>
+                             <Link
+                                to="/ragister"
+                                className="bg-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600 transition"
+                            >
+                                Register
+                            </Link>
+                           </div>
                         ) : (
                             <div onClick={handleProfile}>
                                 <img
