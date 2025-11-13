@@ -2,11 +2,13 @@ import { use } from "react";
 import { AuthContext } from "../../CONTEXT/AuthContext";
 import axios from "../../AXIOS_api/Axio";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddModel = () => {
 
     const { user } = use(AuthContext);
 
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -25,13 +27,21 @@ const AddModel = () => {
         // console.log("New Model Added:", NewAIMODEL);
 
         axios.post("/AllModels", { name, framework, useCase, dataset, description, image, createdBy, createdAt, purchased })
-            .then(res => {
-                const Uploated = res.data;
-                if (Uploated.insertedId) {
-                    toast.success("Successfully Uploated");
-                    form.reset();
+            .then((res) => {
+                if (res.data.insertedId) {
+                    toast.promise(
+                        new Promise((resolve) => {
+                            setTimeout(() => resolve(), 1500);
+                        }),
+                        {
+                            pending: "Successfully Uploaded 👏",
+                            success: "Successfully Uploaded 👏",
+                        }
+                    ).then(() => {
+                        navigate('/allmodels');
+                        form.reset();
+                    });
                 }
-                console.log("Added:", res.data)
             })
             .catch(err => console.error(err));
 

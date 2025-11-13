@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import LetestProducts from "../../COMPONENTS/LetestProducts";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
     // 🔹 Demo data (later replace with API fetch)
@@ -9,12 +10,12 @@ const Home = () => {
     // const letestModelsPromise = fetch("http://localhost:3000/Letest-AllModels").then(res => res.json())
     const [latestModels, setLatestModels] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/Letest-AllModels")
-      .then((res) => res.json())
-      .then((data) => setLatestModels(data))
-      .catch((err) => console.error("Error fetching models:", err));
-  }, []);
+    useEffect(() => {
+        fetch("http://localhost:3000/Letest-AllModels")
+            .then((res) => res.json())
+            .then((data) => setLatestModels(data))
+            .catch((err) => console.error("Error fetching models:", err));
+    }, []);
 
 
     return (
@@ -38,8 +39,8 @@ const Home = () => {
 
                 <div>
 
-                    <LetestProducts latestModels = {latestModels}></LetestProducts>
-                    
+                    <LetestProducts latestModels={latestModels}></LetestProducts>
+
                 </div>
             </section>
 
@@ -56,7 +57,7 @@ const Home = () => {
                     humans and machines interact.
                 </p>
             </section>
-
+            <ToastContainer position="top-center" />
             {/* 🚀 Static Section: Get Started */}
             <section className="py-20 text-center bg-gradient-to-t from-gray-900 to-gray-950">
                 <h2 className="text-3xl font-semibold text-blue-400 mb-4">
