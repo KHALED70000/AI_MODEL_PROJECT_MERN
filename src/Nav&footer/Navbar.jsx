@@ -63,7 +63,7 @@ const Navbar = () => {
     const modalClose = () => {
         profile.current.close()
     }
-    
+
     const modalCloseLog = () => {
         signOutUser()
             .then(() => {
@@ -171,11 +171,12 @@ const Navbar = () => {
                     <p className="text-gray-300  italic text-center">{user?.email}</p>
                     <ul className="grid gap-4 mt-6">
 
-                        <li onClick={modalClose} className="cursor-pointer font-bold">
-                            <NavLink to="/modelspurchese">Models Purchese</NavLink>
-                        </li>
+                        
                         <li onClick={modalClose} className="cursor-pointer font-bold">
                             <NavLink to="/mymodels">My Models</NavLink>
+                        </li>
+                        <li onClick={modalClose} className="cursor-pointer font-bold">
+                            <NavLink to="/modelspurchese">Models Purchese</NavLink>
                         </li>
                         <li onClick={modalCloseLog} className="cursor-pointer flex gap-2 text-red-500 font-bold">
                             <TbLogout size={25} /> Log Out
