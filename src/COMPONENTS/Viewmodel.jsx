@@ -1,9 +1,83 @@
-import React from 'react';
+import React, { use, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import axiosInstance from '../AXIOS_api/Axio';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../CONTEXT/AuthContext';
 
 const Viewmodel = () => {
     const Model = useLoaderData();
-    console.log(Model);
+    if (!Model) {
+        return <p className="text-center text-gray-400">Model data not found!</p>;
+    }
+
+    const { _id, name, framework, useCase, dataset, description, image } = Model;
+    console.log(name);
+
+    const { user } = use(AuthContext);
+
+    const handlePurchase = async () => {
+        Swal.fire({
+            title: " Want to purchese this Model?",
+            // text: "You won’t be able to recover this model once deleted!",
+            icon: "question",
+            background: "#0a0a0f",
+            color: "#e0f7ff",
+            iconColor: "#00ffff",
+            showCancelButton: true,
+            confirmButtonColor: "#00bfff",
+            cancelButtonColor: "#ff3366",
+            confirmButtonText: "Yes, Purchese It!",
+            cancelButtonText: "Not Yet!",
+            customClass: {
+                popup: "rounded-3xl shadow-[0_0_25px_rgba(0,200,255,0.3)] border border-[#00bfff33]",
+                title: "text-neon-blue text-2xl font-semibold tracking-wide",
+                htmlContainer: "text-gray-300 text-sm font-light",
+                confirmButton:
+                    "bg-[#00bfff] text-black font-semibold px-6 py-2 rounded-lg hover:shadow-[0_0_15px_#00ffff] transition-all duration-300 cursor-pointer",
+                cancelButton:
+                    "bg-[#1e1e2f] text-gray-300 font-semibold px-6 py-2 rounded-lg hover:bg-[#2a2a3d] hover:text-white transition-all duration-300 ml-4 cursor-pointer",
+            },
+            buttonsStyling: false,
+            showClass: {
+                popup: "animate__animated animate__fadeInDown animate__faster",
+            },
+            hideClass: {
+                popup: "animate__animated animate__fadeOutUp animate__faster",
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosInstance.post('/purchese', { modelId: _id, createdBy: user?.email, name, framework, useCase, dataset, description, image })
+                    .then((res) => {
+                        console.log(res.data)
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "✅ The Model has been Updated successfully!",
+                                background: "#0a0a0f",
+                                color: "#ccf7ff",
+                                iconColor: "#00ffff",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                customClass: {
+                                    popup: "rounded-2xl shadow-[0_0_30px_rgba(0,200,255,0.3)] border border-[#00bfff33]",
+                                    title: "text-[#00ffff] font-semibold tracking-wide text-lg drop-shadow-[0_0_5px_#00ffff]",
+                                },
+                                showClass: {
+                                    popup: "animate__animated animate__fadeInUp animate__faster",
+                                },
+                                hideClass: {
+                                    popup: "animate__animated animate__fadeOutDown animate__faster",
+                                },
+                            });
+                        }
+                    }).catch()
+            }
+        })
+
+
+
+    };
+
 
     return (
         <div className="mt-20 bg-gray-950 min-h-screen text-gray-200 py-10 px-4 md:px-16 container mx-auto">
@@ -71,6 +145,7 @@ const Viewmodel = () => {
 
                     {/* Subscribe Button */}
                     <button
+                        onClick={handlePurchase}
                         className="bg-neon-blue text-white font-semibold py-3 rounded-xl shadow-[0_0_15px_rgba(0,200,255,0.6)] hover:shadow-[0_0_25px_rgba(0,200,255,0.9)] transition-all duration-300 hover:scale-101"
                     >
                         🔔 Purchese Model

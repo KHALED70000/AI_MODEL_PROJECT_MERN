@@ -144,7 +144,7 @@ const Mymodels = () => {
                         },
                     });
 
-                    
+
                     setTimeout(() => {
                         modelReff.current.close();
                         if (document.activeElement) {
@@ -174,11 +174,14 @@ const Mymodels = () => {
                                 <p className='text-[20px] font-semibold'>{allmodel.name}</p>
                                 <p> <span className='font-semibold'>Framework:</span> <button className='bg-gray-950 px-2 py-1 rounded-full italic text-[12px] text-blue-400'>{allmodel.framework}</button></p>
 
-                                <p className='text-gray-400 italic h-[50px]'>
-                                    {allmodel.description.split(" ").length > 10
-                                        ? allmodel.description.split(" ").slice(0, 10).join(" ") + "......"
-                                        : allmodel.description}
+                                <p className="text-gray-400 italic h-[50px]">
+                                    {allmodel?.description
+                                        ? allmodel.description.split(" ").length > 10
+                                            ? allmodel.description.split(" ").slice(0, 10).join(" ") + "..."
+                                            : allmodel.description
+                                        : "No description available"}
                                 </p>
+
 
                                 <div className='flex justify-between gap-4'>
                                     <button onClick={() => handleEditModel(allmodel._id)} className='flex items-center justify-center gap-2 w-full mt-4 text-center bg-neon-blue text-white font-semibold py-3 rounded-xl shadow-[0_0_10px_rgba(0,200,255,0.6)] hover:shadow-[0_0_15px_rgba(0,200,255,0.9)] transition-all duration-300 hover:scale-102'>Edit <span className='text-blue-500'><FaEdit size={20} /></span></button>
