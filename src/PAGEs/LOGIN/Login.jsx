@@ -46,11 +46,12 @@ const Login = () => {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-gray-900 px-4">
-            <div className="bg-gray-900 shadow-xl rounded-2xl p-8 w-full max-w-md border border-gray-800">
-                <h2 className="text-3xl font-semibold text-center text-blue-400 mb-6">
-                    Login to Your Account
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-950 to-gray-900 px-4">
+            <h2 className="text-4xl font-semibold text-center text-blue-400 mb-6">
+                    Login to AI Model Inventory Manager
                 </h2>
+            <div className="bg-gray-900 shadow-xl rounded-2xl p-8 w-full max-w-md border border-gray-800">
+                
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Email */}
@@ -85,16 +86,17 @@ const Login = () => {
                             type={showPassword ? "text" : "password"}
                             required
                             className="w-full px-4 py-3 bg-gray-800 text-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 pr-10"
-                            placeholder="••••••••"
+                            placeholder="password here"
                         />
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-11 text-gray-400 hover:text-blue-400"
+                            className="absolute right-3 top-11.5 text-gray-400 hover:text-blue-400"
                         >
                             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                         </button>
                     </div>
+                    <p>Forget Password?</p>
 
                     {
                         error && <p className="text-red-600 font-semibold">{error}</p>

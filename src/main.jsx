@@ -12,12 +12,13 @@ import AuthProvider from './CONTEXT/AuthProvider.jsx';
 import Addmodel from './PAGEs/ADDMODEL/Addmodel.jsx';
 import Allmodel from './PAGEs/ALLMODEL/Allmodel.jsx';
 import Privetrout from './PRIVETr/Privetrout.jsx';
+import Viewmodel from './COMPONENTS/Viewmodel.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
-    children:[
+    children: [
       {
         index: true,
         path: '/',
@@ -36,6 +37,12 @@ const router = createBrowserRouter([
         </Privetrout>
       },
       {
+        path: "/viewmodel/:id",
+        loader: ({ params }) => fetch(`http://localhost:3000/AllModels/${params.id}`),
+        hydrateFallbackElement: <div>Loading...</div>,
+        Component: Viewmodel,
+      },
+      {
         path: '/login',
         Component: Login
       },
@@ -48,7 +55,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-   <StrictMode>
+  <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>

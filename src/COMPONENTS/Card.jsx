@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Card = ({ Aimodel }) => {
     const { _id, image, name, framework, description } = Aimodel;
@@ -18,7 +19,7 @@ const Card = ({ Aimodel }) => {
                         : description}
                 </p>
 
-                <button className='btn bg-blue-500'>View Model</button>
+                <NavLink to={`/viewmodel/${_id}`} className='btn bg-blue-500 mt-2'>View Model</NavLink>
             </div>
 
         </div>
