@@ -55,19 +55,20 @@ const Navbar = () => {
     const { user, signOutUser } = use(AuthContext);
 
     const profile = useRef()
-    const handleProfile = ()=>{
+    const handleProfile = () => {
         profile.current.showModal()
     }
-  
+
     const navigate = useNavigate()
     const modalClose = () => {
         profile.current.close()
     }
-      const modalCloseLog = () => {
+    
+    const modalCloseLog = () => {
         signOutUser()
-        .then(()=> {
-            navigate('/login')
-        })
+            .then(() => {
+                navigate('/login')
+            })
         profile.current.close()
     }
 
@@ -103,20 +104,20 @@ const Navbar = () => {
                     {/* Right Side: Login Button */}
                     <div>
                         {!user ? (
-                           <div className="flex gap-2">
-                             <Link
-                                to="/login"
-                                className="bg-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600 transition"
-                            >
-                                Login
-                            </Link>
-                             <Link
-                                to="/ragister"
-                                className="bg-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600 transition"
-                            >
-                                Register
-                            </Link>
-                           </div>
+                            <div className="flex gap-2">
+                                <Link
+                                    to="/login"
+                                    className="bg-transparent border border-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600 transition"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to="/ragister"
+                                    className="bg-blue-500 px-5 py-2 rounded-lg hover:bg-blue-600 transition"
+                                >
+                                    Register
+                                </Link>
+                            </div>
                         ) : (
                             <div onClick={handleProfile}>
                                 <img
@@ -160,7 +161,7 @@ const Navbar = () => {
             )}
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-           
+
             <dialog ref={profile} className="modal">
                 <div className="modal-box">
                     <div className="flex justify-center w-full">
@@ -168,16 +169,16 @@ const Navbar = () => {
                     </div>
                     <p className="text-2xl uppercase italic text-center font-semibold mt-2">{user?.displayName}</p>
                     <p className="text-gray-300  italic text-center">{user?.email}</p>
-                    <ul className="grid gap-2 mt-6">
-                       
+                    <ul className="grid gap-4 mt-6">
+
                         <li onClick={modalClose} className="cursor-pointer font-bold">
-                            Model Purchase
+                            <NavLink to="/modelspurchese">Models Purchese</NavLink>
                         </li>
                         <li onClick={modalClose} className="cursor-pointer font-bold">
-                            My Models
+                            <NavLink to="/mymodels">My Models</NavLink>
                         </li>
-                         <li onClick={modalCloseLog} className="cursor-pointer flex gap-2 text-red-500 font-bold">
-                            <TbLogout size={25}/> Log Out
+                        <li onClick={modalCloseLog} className="cursor-pointer flex gap-2 text-red-500 font-bold">
+                            <TbLogout size={25} /> Log Out
                         </li>
 
                     </ul>

@@ -6,7 +6,7 @@ const Viewmodel = () => {
     console.log(Model);
 
     return (
-        <div className="mt-20 bg-gray-950 min-h-screen text-gray-200 py-10 px-5 md:px-16">
+        <div className="mt-20 bg-gray-950 min-h-screen text-gray-200 py-10 px-4 md:px-16 container mx-auto">
             {/* Back Button */}
             <div className="mb-8">
                 <Link
@@ -39,7 +39,7 @@ const Viewmodel = () => {
                     </div>
 
                     {/* Description */}
-                    <div className="mt-5 bg-gray-950/60 p-4 rounded-xl border border-gray-800 backdrop-blur-sm">
+                    <div className="mt-5 bg-gray-950/60 p-4 rounded-xl border border-gray-800 backdrop-blur-sm w-full">
                         <h2 className="text-lg font-semibold text-neon-blue mb-2">Description</h2>
                         <p className="text-gray-300 leading-relaxed text-sm italic">
                             {Model.description}
@@ -71,7 +71,7 @@ const Viewmodel = () => {
 
                     {/* Subscribe Button */}
                     <button
-                        className="bg-neon-blue text-white font-semibold py-3 rounded-xl shadow-[0_0_15px_rgba(0,200,255,0.6)] hover:shadow-[0_0_25px_rgba(0,200,255,0.9)] transition-all duration-300 hover:scale-105"
+                        className="bg-neon-blue text-white font-semibold py-3 rounded-xl shadow-[0_0_15px_rgba(0,200,255,0.6)] hover:shadow-[0_0_25px_rgba(0,200,255,0.9)] transition-all duration-300 hover:scale-101"
                     >
                         🔔 Purchese Model
                     </button>

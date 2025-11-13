@@ -19,7 +19,7 @@ const Allmodel = () => {
             <div className='grid grid-cols-3 gap-6 max-[800px]:grid-cols-2 max-[600px]:grid-cols-1 container mx-auto'>
                 {
                     allmodels.map(allmodel => (
-                        <div className='from-gray-900 to-gray-950 bg-gradient-to-t p-4 rounded-2xl shadow-[0_0_25px_rgba(0,170,255,0.2)] hover:shadow-[0_0_35px_rgba(0,170,255,0.4)] transition-all duration-300'>
+                        <div key={allmodel._id} className='from-gray-900 to-gray-950 bg-gradient-to-t p-4 rounded-2xl shadow-[0_0_25px_rgba(0,170,255,0.2)] hover:shadow-[0_0_35px_rgba(0,170,255,0.4)] transition-all duration-300'>
                             <div>
                                 <img className='rounded-2xl h-[300px] w-full' src={allmodel.image} alt={allmodel.name} />
                             </div>

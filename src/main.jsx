@@ -13,6 +13,7 @@ import Addmodel from './PAGEs/ADDMODEL/Addmodel.jsx';
 import Allmodel from './PAGEs/ALLMODEL/Allmodel.jsx';
 import Privetrout from './PRIVETr/Privetrout.jsx';
 import Viewmodel from './COMPONENTS/Viewmodel.jsx';
+import Mymodels from './PAGEs/MyModal/Mymodels.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,13 @@ const router = createBrowserRouter([
         element: <Privetrout>
           <Viewmodel></Viewmodel>
         </Privetrout>
+      },
+      {
+        path: '/mymodels',
+        element: <Privetrout>
+          <Mymodels></Mymodels>
+        </Privetrout>
+
       },
       {
         path: '/login',
