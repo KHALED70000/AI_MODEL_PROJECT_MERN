@@ -30,12 +30,14 @@ const Ragister = () => {
 
         const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         if(!passwordPattern.test(password)){
+            toast.error("Password must be contain at least one uppercase letter one lowercase letter and 6 characters long...!")
             setLogerror('Password must be contain at least one uppercase letter one lowercase letter and 6 characters long...!');
             return;
         }
 
 
         if (password !== confirm) {
+            
             setPassconferm("Passwords do not match!");
             return;
         }
