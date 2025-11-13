@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react"; // 👁️ React icons (lucide-react)
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../CONTEXT/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
 
 // যদি lucide-react install না করা থাকে:
 // npm install lucide-react
@@ -12,7 +13,7 @@ const Login = () => {
     const [error, setError] = useState()
 
     const navigate = useNavigate()
-    const {logInUser,signInWithGoogle, setUser}=use(AuthContext);
+    const { logInUser, signInWithGoogle, setUser } = use(AuthContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,16 +22,17 @@ const Login = () => {
         const password = form.password.value;
 
         logInUser(email, password)
-        .then((result)=>{
-            const NEW_USER = result.user;
-            setUser(NEW_USER);
+            .then((result) => {
+                const NEW_USER = result.user;
+                setUser(NEW_USER);
 
-            form.reset();
-            navigate('/');
-        })
-        .catch(()=>{
-            setError('Invalid Email or Password')
-        })
+                form.reset();
+                navigate('/');
+            })
+            .catch(() => {
+                toast.error("Invalid Email or Password!");
+                setError('Invalid Email or Password')
+            })
 
         console.log({ email, password });
         // later: add Firebase / JWT auth logic here
@@ -38,20 +40,20 @@ const Login = () => {
 
     const googleSignIn = () => {
         signInWithGoogle()
-        .then((result)=>{
-            const NEW_USER = result.user;
-            setUser(NEW_USER);
-            navigate('/');
-        })
+            .then((result) => {
+                const NEW_USER = result.user;
+                setUser(NEW_USER);
+                navigate('/');
+            })
     }
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-950 to-gray-900 px-4">
             <h2 className="text-4xl font-semibold text-center text-blue-400 mb-6">
-                    Login to AI Model Inventory Manager
-                </h2>
+                Login to AI Model Inventory Manager
+            </h2>
             <div className="bg-gray-900 shadow-xl rounded-2xl p-8 w-full max-w-md border border-gray-800">
-                
+
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Email */}
@@ -113,6 +115,8 @@ const Login = () => {
                 <button onClick={googleSignIn} className="mt-6 w-full flex items-center justify-center gap-3 bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 py-3 rounded-lg font-medium transition-all duration-200">
                     <FcGoogle size={25} /> Continue with Google
                 </button>
+                <ToastContainer position="top-center" />
+
 
                 <p className="text-gray-400 text-center mt-6">
                     Don't have an account?{" "}
