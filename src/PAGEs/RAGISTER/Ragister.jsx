@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../CONTEXT/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const Ragister = () => {
@@ -48,6 +49,7 @@ const Ragister = () => {
                 navigate('/');
             })
             .catch(() => {
+                toast.error("Email already in use!");
                 setLogerror('This email account is already used, Try another account....');
             });
 
@@ -65,11 +67,13 @@ const Ragister = () => {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-gray-900 px-4 mt-20">
-            <div className="bg-gray-900 shadow-xl rounded-2xl p-8 w-full max-w-md border border-gray-800">
-                <h2 className="text-3xl font-semibold text-center text-blue-400 mb-6">
-                    Create an Account
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-950 to-gray-900 px-4 mt-20">
+            <h2 className="text-4xl font-semibold text-center text-blue-400 mb-6">
+                    Register for AI Model Inventory Manager
                 </h2>
+            <div className="bg-gray-900 shadow-xl rounded-2xl p-8 w-full max-w-md border border-gray-800">
+                <ToastContainer position="top-center" />
+
 
                 <form onSubmit={handleRegister} className="space-y-6">
                     {/* Name */}
