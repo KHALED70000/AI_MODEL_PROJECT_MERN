@@ -15,11 +15,13 @@ import Privetrout from './PRIVETr/Privetrout.jsx';
 import Viewmodel from './COMPONENTS/Viewmodel.jsx';
 import Mymodels from './PAGEs/MyModal/Mymodels.jsx';
 import Purchese from './PAGEs/PURCHESE/Purchese.jsx';
+import NotFound from './PAGEs/ERROR404/NotFound.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         index: true,
@@ -65,7 +67,11 @@ const router = createBrowserRouter([
       {
         path: '/ragister',
         Component: Ragister,
-      }
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ]
   },
 ]);
